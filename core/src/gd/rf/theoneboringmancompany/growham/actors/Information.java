@@ -29,7 +29,7 @@ public class Information extends Table {
 
         aboutHealth = new Label("Здоровье", new Label.LabelStyle(main.fontOrdinary, Color.WHITE));
         aboutHungry = new Label("Голод", new Label.LabelStyle(main.fontOrdinary, Color.WHITE));
-        aboutAge = new Label("Возраст", new Label.LabelStyle(main.fontOrdinary, Color.WHITE));
+        aboutAge = new Label("День", new Label.LabelStyle(main.fontOrdinary, Color.WHITE));
         aboutMoney = new Label("Деньги", new Label.LabelStyle(main.fontOrdinary, Color.WHITE));
 
         setInfo();
@@ -67,9 +67,6 @@ public class Information extends Table {
     }
 
     public void updateInfo(){
-        hamster.setHealth(hamster.getHealth() - 1);
-        hamster.setHungry(hamster.getHungry() - 1);
-
         Color CHealth = Color.WHITE;
         Color CHungry = Color.WHITE;
 
@@ -82,6 +79,7 @@ public class Information extends Table {
 
         health.setText(Integer.toString(hamster.getHealth()));
         hungry.setText(Integer.toString(hamster.getHungry()));
+        age.setText(Integer.toString(hamster.getAge()));
         health.setColor(CHealth);
         hungry.setColor(CHungry);
     }

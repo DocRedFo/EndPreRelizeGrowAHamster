@@ -1,6 +1,8 @@
 package gd.rf.theoneboringmancompany.growham.actors;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
@@ -13,11 +15,14 @@ public class Hamster extends Actor {
 
     private boolean hasNamed = false;
 
-    private int age = 0;
+    private int age = 1;
     private int health = 100;
     private int hungry = 100;
-    private int money = 2001;
+    private int money = 10000;
     private int roomLevel = 1;
+
+    private float time = 0f;
+    private float ageTime = 0f;
 
     private TextureAtlas atlas;
     private Animation animation;
@@ -26,6 +31,34 @@ public class Hamster extends Actor {
 
     public Hamster(Main main){
         this.main = main;
+    }
+
+
+    @Override
+    public void draw(Batch batch, float parentAlpha) {
+        ageTime += Gdx.graphics.getDeltaTime();
+        time += Gdx.graphics.getDeltaTime();
+        liveInformation();
+
+    }
+
+    public void liveInformation(){
+        if (ageTime >= 3600){
+            ageTime += 0;
+            age += 1;
+        }
+        if (time >= 10) {
+            time = 0;
+            int i = (int) (Math.random() * 1000);
+            switch (i) {
+                case 4:
+                    setHealth(getHealth() - 1);
+                    break;
+                case 88:
+                    setHungry(getHungry() - 1);
+                    break;
+            }
+        }
     }
 
     public boolean isHasNamed() {
