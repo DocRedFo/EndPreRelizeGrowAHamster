@@ -22,12 +22,8 @@ public class Food extends MyButton {
                 if (main.hamster.getHungry() < 100 && main.hamster.getMoney() >= Integer.parseInt(howMuch)){
                     sound.play(Volume);
                     main.hamster.setMoney(main.hamster.getMoney() - Integer.parseInt(howMuch));
-                    int n = main.hamster.getHungry() + 5;
-                    if (n > 100){
-                        main.hamster.setHungry(100);
-                    }
-                    else {
-                        main.hamster.setHungry(main.hamster.getHungry() + 5);
+                    for (int i = 0; i < 5 && main.hamster.getHungry() < 100; i++){
+                        main.hamster.setHungry(main.hamster.getHungry() + 1);
                     }
                 }
                 else {

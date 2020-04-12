@@ -21,11 +21,7 @@ public class Med extends MyButton {
                 if (main.hamster.getHealth() < 100 && main.hamster.getMoney() >= Integer.parseInt(howMuch)){
                     sound.play(Volume);
                     main.hamster.setMoney(main.hamster.getMoney() - Integer.parseInt(howMuch));
-                    int n = main.hamster.getHealth() + 10;
-                    if (n > 100){
-                        main.hamster.setHealth(100);
-                    }
-                    else {
+                    for (int i = 0; i < 10 && main.hamster.getHealth() < 100; i++){
                         main.hamster.setHealth(main.hamster.getHealth() + 10);
                     }
                 }

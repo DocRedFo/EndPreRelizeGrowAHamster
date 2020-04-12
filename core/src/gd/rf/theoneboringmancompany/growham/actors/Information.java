@@ -80,6 +80,7 @@ public class Information extends Table {
         health.setText(Integer.toString(hamster.getHealth()));
         hungry.setText(Integer.toString(hamster.getHungry()));
         age.setText(Integer.toString(hamster.getAge()));
+        money.setText(Integer.toString(hamster.getMoney()));
         health.setColor(CHealth);
         hungry.setColor(CHungry);
     }

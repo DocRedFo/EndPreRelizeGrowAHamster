@@ -14,6 +14,7 @@ import gd.rf.theoneboringmancompany.growham.actors.Hamster;
 import gd.rf.theoneboringmancompany.growham.screens.LogoScreen;
 import gd.rf.theoneboringmancompany.growham.screens.MenuScreen;
 import gd.rf.theoneboringmancompany.growham.screens.PlayRoomScreen;
+import gd.rf.theoneboringmancompany.growham.utils.Serialization;
 
 public class Main extends Game {
     private SpriteBatch batch;
@@ -45,7 +46,13 @@ public class Main extends Game {
 
         beginTime = System.currentTimeMillis();
 
-        hamster = new Hamster(this);
+        if (Gdx.files.local("player.dat").exists()){
+            hamster = Serialization.readPlayer();
+            hamster.loadTextures();
+        }
+        else {
+            hamster = new Hamster(this);
+        }
 
         this.setScreen(new LogoScreen(this));
 	}
@@ -74,7 +81,14 @@ public class Main extends Game {
         }
     }
 
-	@Override
+    @Override
+    public void pause() {
+        super.pause();
+        hamster.setPosition("Sit");
+        Serialization.savePlayer(hamster);
+    }
+
+    @Override
 	public void dispose () {
         super.dispose();
         batch.dispose();
