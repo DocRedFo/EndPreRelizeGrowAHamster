@@ -26,6 +26,18 @@ public class Hamster extends Actor implements Serializable {
     private float ageTime = 0f;
     private float delta = 0f;
 
+
+
+    final int AnythingButton = 0;
+    final int SleepButton = 1;
+    final int PlayButton = 2;
+
+    int buttonNum = 0;
+
+    float SleepTime = 0;
+    float FitTime = 0f;
+
+
     public transient TextureAtlas atlas;
     private transient Texture texture;
     private transient Animation<TextureAtlas.AtlasRegion> animation;
@@ -93,15 +105,34 @@ public class Hamster extends Actor implements Serializable {
         delta += Gdx.graphics.getDeltaTime();
         ageTime += Gdx.graphics.getDeltaTime();
         time += Gdx.graphics.getDeltaTime();
+        SleepTime += Gdx.graphics.getDeltaTime();
+        FitTime += Gdx.graphics.getDeltaTime();
+
         liveInformation();
         hamsterUpdate();
+        Sleep();
+        FitPlay();
+
         if (position.equals("Sleep")) {
             batch.draw(texture, X, Y);
         }
         else {
             batch.draw(animation.getKeyFrame(delta, true), X, Y);
         }
+
         setPosition(X, Y);
+    }
+
+    public void Sleep(){
+        if (buttonNum == SleepButton){
+
+        }
+    }
+
+    public void FitPlay(){
+        if (buttonNum == PlayButton){
+
+        }
     }
 
     public void hamsterUpdate() {

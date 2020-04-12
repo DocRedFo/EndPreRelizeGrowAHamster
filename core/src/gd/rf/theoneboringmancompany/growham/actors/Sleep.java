@@ -9,9 +9,6 @@ import gd.rf.theoneboringmancompany.growham.Main;
 import gd.rf.theoneboringmancompany.growham.utils.MyButton;
 
 public class Sleep extends MyButton {
-    private float time = 0f;
-    private boolean clicked = true;
-
     public Sleep(final Main main) {
         super(main, "Pictures/Buttons/NonAnimation/sleep.png");
         setPosition(main.stage.getWidth() - imgButton.getWidth(),
@@ -20,12 +17,9 @@ public class Sleep extends MyButton {
         addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                if (clicked) {
-                    clicked = false;
-                    time = 0f;
-                    main.hamster.setPosition("Sleep");
-                    if (main.hamster.getHealth() < 100)main.hamster.setHealth(main.hamster.getHealth() + 1);
-                    if (main.hamster.getHungry() < 100)main.hamster.setHungry(main.hamster.getHungry() + 1);
+                if (main.hamster.buttonNum == main.hamster.AnythingButton) {
+                    main.hamster.buttonNum = main.hamster.SleepButton;
+                    main.hamster.Sleep();
                 }
                 else {
                     Gdx.input.vibrate(20);
@@ -34,24 +28,8 @@ public class Sleep extends MyButton {
         });
     }
 
-    private void setOutSleep(){
-        if (time > 20){
-            main.hamster.setPosition("Sit");
-        }
-    }
-
-    private void Sleep(){
-        if (time > 100){
-            time = 0;
-            clicked = true;
-        }
-    }
-
     @Override
     public void draw(Batch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
-        time+= Gdx.graphics.getDeltaTime();
-        setOutSleep();
-        Sleep();
     }
 }

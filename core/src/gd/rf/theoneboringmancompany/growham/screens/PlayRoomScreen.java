@@ -11,7 +11,6 @@ import gd.rf.theoneboringmancompany.growham.actors.Market;
 import gd.rf.theoneboringmancompany.growham.actors.Room;
 import gd.rf.theoneboringmancompany.growham.actors.Sleep;
 import gd.rf.theoneboringmancompany.growham.utils.MyScreen;
-import gd.rf.theoneboringmancompany.growham.utils.Serialization;
 
 public class PlayRoomScreen extends MyScreen {
     public final static int NUMBER = 3;
