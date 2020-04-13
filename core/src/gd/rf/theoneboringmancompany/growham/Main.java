@@ -10,7 +10,9 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
+import gd.rf.theoneboringmancompany.growham.actors.FitPlay;
 import gd.rf.theoneboringmancompany.growham.actors.Hamster;
+import gd.rf.theoneboringmancompany.growham.actors.Sleep;
 import gd.rf.theoneboringmancompany.growham.screens.LogoScreen;
 import gd.rf.theoneboringmancompany.growham.screens.MenuScreen;
 import gd.rf.theoneboringmancompany.growham.screens.PlayRoomScreen;
@@ -22,6 +24,9 @@ public class Main extends Game {
     public Viewport viewport;
     public Stage stage;
     public Hamster hamster;
+    public Sleep sleep;
+    public FitPlay fitPlay;
+
     public long beginTime;
 
     @Override
@@ -54,6 +59,9 @@ public class Main extends Game {
             hamster = new Hamster(this);
         }
 
+        sleep = new Sleep(this);
+        fitPlay = new FitPlay(this);
+
         this.setScreen(new LogoScreen(this));
 	}
 
@@ -81,15 +89,13 @@ public class Main extends Game {
         }
     }
 
-    @Override
-    public void pause() {
-        super.pause();
-        hamster.setPosition("Sit");
-        Serialization.savePlayer(hamster);
-    }
+
 
     @Override
 	public void dispose () {
+        hamster.setPosition("Sit");
+        hamster.setX(hamster.standardX);
+        Serialization.savePlayer(hamster);
         super.dispose();
         batch.dispose();
         fontOrdinary.dispose();

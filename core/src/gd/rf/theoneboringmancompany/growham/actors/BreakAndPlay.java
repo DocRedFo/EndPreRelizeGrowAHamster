@@ -21,8 +21,8 @@ public class BreakAndPlay extends MyMenuButton {
         addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                sound.play(Volume);
                 if (Gdx.files.local("player.dat").exists()){
+                    sound.play(Volume);
                     Gdx.files.local("player.dat").delete();
                     main.hamster = new Hamster(main);
                     main.setScreen(new PlayRoomScreen(main));
