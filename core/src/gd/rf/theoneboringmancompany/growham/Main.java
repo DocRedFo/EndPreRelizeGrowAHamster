@@ -31,11 +31,13 @@ public class Main extends Game {
 
     public AndroidDatabase database;
 
+    public long beginTime;
+
     public Main(AndroidHandler handlerDatabase){
         database = new AndroidDatabase(handlerDatabase);
     }
 
-    public long beginTime;
+
 
     @Override
 	public void create () {
@@ -57,8 +59,6 @@ public class Main extends Game {
 
         Gdx.gl.glClearColor(0,0,0,1);
 
-        beginTime = System.currentTimeMillis();
-
         if (Gdx.files.local("player.dat").exists()){
             hamster = Serialization.readPlayer();
             hamster.loadTextures(this);
@@ -69,6 +69,22 @@ public class Main extends Game {
 
         sleep = new Sleep(this);
         fitPlay = new FitPlay(this);
+
+        beginTime = System.currentTimeMillis();
+
+        if (hamster.endTimeFlag){
+            long n = (beginTime - hamster.endTime) / 1000;
+            long time = n / 10;
+            long age = n / 3600;
+            for (long i = 0; i < age; i++) {
+                hamster.ageTime = 3600;
+                hamster.liveInformation();
+            }
+            for (long i = 0; i < time; i++){
+                hamster.time = 10;
+                hamster.liveInformation();
+            }
+        }
 
         this.setScreen(new LogoScreen(this));
 	}
@@ -98,6 +114,8 @@ public class Main extends Game {
     }
 
     private void serialization(){
+        hamster.endTime = System.currentTimeMillis();
+        hamster.endTimeFlag = true;
         hamster.setPosition("Sit");
         hamster.setX(hamster.standardX);
         Serialization.savePlayer(hamster);
@@ -107,8 +125,8 @@ public class Main extends Game {
 
     @Override
     public void pause() {
-        super.pause();
         serialization();
+        super.pause();
     }
 
     @Override

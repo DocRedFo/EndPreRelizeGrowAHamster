@@ -6,6 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 import gd.rf.theoneboringmancompany.growham.Main;
+import gd.rf.theoneboringmancompany.growham.screens.PlayRoomScreen;
 import gd.rf.theoneboringmancompany.growham.utils.MyButton;
 
 public class Update extends MyButton {
@@ -31,7 +32,7 @@ public class Update extends MyButton {
         addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                if (main.hamster.getRoomLevel() == 1 && main.hamster.getMoney() >= Integer.parseInt(howMuch)){
+                if (main.hamster.getMoney() >= Integer.parseInt(howMuch)){
                     sound.play(Volume);
                     main.hamster.setRoomLevel(main.hamster.getRoomLevel()+1);
                     main.hamster.setMoney(main.hamster.getMoney() - Integer.parseInt(howMuch));
@@ -40,6 +41,13 @@ public class Update extends MyButton {
                 }
                 else {
                     Gdx.input.vibrate(20);
+                }
+
+                if (main.hamster.getRoomLevel() > 1){
+                    main.stage.clear();
+                    main.stage.addActor(new Back(main, PlayRoomScreen.NUMBER));
+                    main.stage.addActor(new Med(main));
+                    main.stage.addActor(new Food(main));
                 }
 
             }

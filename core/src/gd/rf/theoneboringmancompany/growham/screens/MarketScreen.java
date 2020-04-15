@@ -19,7 +19,6 @@ public class MarketScreen extends MyScreen {
         main.stage.addActor(new Back(main, PlayRoomScreen.NUMBER));
         main.stage.addActor(new Med(main));
         main.stage.addActor(new Food(main));
-        //Del after use
         main.stage.addActor(new Update(main));
     }
 

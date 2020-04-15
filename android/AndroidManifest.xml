@@ -1,27 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="gd.rf.theoneboringmancompany.growham" >
+    package="gd.rf.theoneboringmancompany.growham">
 
     <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
         android:allowBackup="true"
+        android:appCategory="game"
         android:icon="@mipmap/ic_launcher"
         android:isGame="true"
-        android:appCategory="game"
         android:label="@string/app_name"
         android:theme="@style/GdxTheme"
-        tools:targetApi="o"
-        tools:ignore="AllowBackup">
+        tools:ignore="AllowBackup"
+        tools:targetApi="o">
+
         <activity
-            android:name="gd.rf.theoneboringmancompany.growham.AndroidLauncher"
+            android:name=".AndroidLauncher"
+            android:configChanges="keyboard|keyboardHidden|navigation|orientation|screenSize|screenLayout"
             android:label="@string/app_name"
             android:screenOrientation="landscape"
-            android:configChanges="keyboard|keyboardHidden|navigation|orientation|screenSize|screenLayout"
             tools:ignore="LockedOrientationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

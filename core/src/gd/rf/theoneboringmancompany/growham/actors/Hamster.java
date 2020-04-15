@@ -17,7 +17,9 @@ public class Hamster extends Actor implements Serializable {
 
     protected String name;
 
-    public int gameTime = 0;
+    public long endTime;
+    public boolean endTimeFlag = false;
+
     private boolean hasNamed = false;
 
     private int age = 1;
@@ -26,8 +28,8 @@ public class Hamster extends Actor implements Serializable {
     private int money = 100;
     private int roomLevel = 1;
 
-    private float time = 0f;
-    private float ageTime = 0f;
+    public float time = 0f;
+    public float ageTime = 0f;
     private float delta = 0f;
 
     final int bPlay = 2;
@@ -112,8 +114,6 @@ public class Hamster extends Actor implements Serializable {
         liveInformation();
         hamsterUpdate();
 
-
-
         if (position.equals("Sleep")) {
             batch.draw(texture, X, Y);
         }
@@ -123,8 +123,6 @@ public class Hamster extends Actor implements Serializable {
 
         setPosition(X, Y);
     }
-
-
 
     public void hamsterUpdate() {
         if (age < 200) {
@@ -199,12 +197,12 @@ public class Hamster extends Actor implements Serializable {
     }
 
     public void liveInformation(){
-        if (ageTime >= 1){
+        if (ageTime >= 3600){
             ageTime = 0;
             age++;
             money += 25;
         }
-        if (time >= 0) {
+        if (time >= 10) {
             time = 0;
             int i = (int) (Math.random() * 100);
             switch (i) {
@@ -218,6 +216,7 @@ public class Hamster extends Actor implements Serializable {
             }
         }
     }
+
 
     public boolean isHasNamed() {
         return hasNamed;
@@ -239,7 +238,7 @@ public class Hamster extends Actor implements Serializable {
         return hungry;
     }
 
-    int getRoomLevel() {
+    public int getRoomLevel() {
         return roomLevel;
     }
 
@@ -291,7 +290,4 @@ public class Hamster extends Actor implements Serializable {
         return Y;
     }
 
-    public int getGameTime() {
-        return gameTime;
-    }
 }

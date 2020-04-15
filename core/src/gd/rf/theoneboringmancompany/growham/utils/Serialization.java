@@ -11,7 +11,7 @@ import java.io.ObjectOutputStream;
 
 import gd.rf.theoneboringmancompany.growham.actors.Hamster;
 
-public class Serialization {
+public abstract class Serialization {
     public static void savePlayer(Hamster player) {
         FileHandle file = Gdx.files.local("player.dat");
         try {
