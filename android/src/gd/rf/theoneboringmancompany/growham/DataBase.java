@@ -29,17 +29,22 @@ public class DataBase implements AndroidHandler {
         openHelper = new OpenHelper(context);
     }
 
-    public long insert(String Name, int Time) {
+    public void insert(String Name, int Time) {
         mDataBase = openHelper.getWritableDatabase();
 
         ContentValues cv = new ContentValues();
         cv.put(COLUMN_NAME, Name);
         cv.put(COLUMN_TIME, Time);
 
-        return mDataBase.insert(TABLE_NAME, null, cv);
+        mDataBase.insert(TABLE_NAME, null, cv);
+
+        openHelper.close();
+        mDataBase.close();
     }
 
-    public Object[] select() {
+
+
+    public Object[] selectToScore() {
         mDataBase = openHelper.getReadableDatabase();
 
         String[] columns = {COLUMN_NAME, COLUMN_TIME};
@@ -73,6 +78,7 @@ public class DataBase implements AndroidHandler {
         return o;
 
     }
+
 
     private static class OpenHelper extends SQLiteOpenHelper {
 

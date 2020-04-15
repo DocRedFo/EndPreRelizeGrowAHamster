@@ -192,9 +192,10 @@ public class Hamster extends Actor implements Serializable {
 
     private void death(){
         main.database.insert(name, age);
+        if (Gdx.files.local("player.dat").exists())
         Gdx.files.local("player.dat").delete();
-        main.hamster = new Hamster(main);
         main.setScreen(new ScoreScreen(main));
+        main.hamster = new Hamster(main);
     }
 
     public void liveInformation(){

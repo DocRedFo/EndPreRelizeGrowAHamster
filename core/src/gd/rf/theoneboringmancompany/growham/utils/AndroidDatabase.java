@@ -8,12 +8,13 @@ public class AndroidDatabase implements AndroidHandler {
     }
 
     @Override
-    public long insert(String Name, int Time) {
-        return handler.insert(Name, Time);
+    public void insert(String Name, int Time) {
+        handler.insert(Name, Time);
     }
 
     @Override
-    public Object[] select() {
-        return handler.select();
+    public Object[] selectToScore() {
+        return handler.selectToScore();
     }
+
 }

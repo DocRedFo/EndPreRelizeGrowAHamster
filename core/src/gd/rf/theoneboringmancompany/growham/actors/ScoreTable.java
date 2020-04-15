@@ -19,11 +19,13 @@ public class ScoreTable extends Actor {
         X = main.stage.getWidth()/7;
         Y1 = main.stage.getHeight()/2 + main.stage.getHeight()/9;
         Space = main.stage.getHeight()/6;
+
+        main.fontOrdinary.getData().setScale(2.5f);
     }
 
     public String playerScore(int num){
         String result = "";
-        Object[] o = main.database.select();
+        Object[] o = main.database.selectToScore();
 
         for (int i = 0; i < 6; i++){
             if (o[i] == null) o[i] = "";

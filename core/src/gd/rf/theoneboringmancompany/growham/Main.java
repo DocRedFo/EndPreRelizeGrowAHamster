@@ -28,6 +28,7 @@ public class Main extends Game {
     public Hamster hamster;
     public Sleep sleep;
     public FitPlay fitPlay;
+
     public AndroidDatabase database;
 
     public Main(AndroidHandler handlerDatabase){
@@ -96,13 +97,23 @@ public class Main extends Game {
         }
     }
 
-
-
-    @Override
-	public void dispose () {
+    private void serialization(){
         hamster.setPosition("Sit");
         hamster.setX(hamster.standardX);
         Serialization.savePlayer(hamster);
+    }
+
+
+
+    @Override
+    public void pause() {
+        super.pause();
+        serialization();
+    }
+
+    @Override
+	public void dispose () {
+        serialization();
         super.dispose();
         batch.dispose();
         fontOrdinary.dispose();
