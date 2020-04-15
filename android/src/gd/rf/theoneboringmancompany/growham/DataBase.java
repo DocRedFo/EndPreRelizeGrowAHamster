@@ -46,7 +46,7 @@ public class DataBase implements AndroidHandler {
         Object[] o = new Object[6];
 
         Cursor mCursor = mDataBase.query(TABLE_NAME, columns, null, null,
-                null, null , COLUMN_TIME, String.valueOf(3));
+                null, null , COLUMN_TIME + " DESC", String.valueOf(3));
 
         int oNum = 0;
 

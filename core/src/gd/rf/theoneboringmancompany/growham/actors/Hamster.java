@@ -173,10 +173,7 @@ public class Hamster extends Actor implements Serializable {
                     break;
             }
         }
-        else if (age > 1095){
-            texture = OldSleep;
-        }
-        if (getHealth() <= 90 || getHungry() <= 0) {
+        if (getHealth() <= 0 || getHungry() <= 0 || age > 1095) {
             if (age < 200) {
                 texture = smallSleep;
             }
@@ -195,8 +192,9 @@ public class Hamster extends Actor implements Serializable {
 
     private void death(){
         main.database.insert(name, age);
-        main.setScreen(new ScoreScreen(main));
         Gdx.files.local("player.dat").delete();
+        main.hamster = new Hamster(main);
+        main.setScreen(new ScoreScreen(main));
     }
 
     public void liveInformation(){
