@@ -22,6 +22,8 @@ public class AndroidLauncher extends AndroidApplication {
 		this.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN);
 		this.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
 
-		initialize(new Main(), config);
+		DataBase dataBase = new DataBase(getApplicationContext());
+
+		initialize(new Main(dataBase), config);
 	}
 }

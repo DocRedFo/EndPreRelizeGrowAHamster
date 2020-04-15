@@ -16,6 +16,8 @@ import gd.rf.theoneboringmancompany.growham.actors.Sleep;
 import gd.rf.theoneboringmancompany.growham.screens.LogoScreen;
 import gd.rf.theoneboringmancompany.growham.screens.MenuScreen;
 import gd.rf.theoneboringmancompany.growham.screens.PlayRoomScreen;
+import gd.rf.theoneboringmancompany.growham.utils.AndroidDatabase;
+import gd.rf.theoneboringmancompany.growham.utils.AndroidHandler;
 import gd.rf.theoneboringmancompany.growham.utils.Serialization;
 
 public class Main extends Game {
@@ -26,6 +28,11 @@ public class Main extends Game {
     public Hamster hamster;
     public Sleep sleep;
     public FitPlay fitPlay;
+    public AndroidDatabase database;
+
+    public Main(AndroidHandler handlerDatabase){
+        database = new AndroidDatabase(handlerDatabase);
+    }
 
     public long beginTime;
 
@@ -53,7 +60,7 @@ public class Main extends Game {
 
         if (Gdx.files.local("player.dat").exists()){
             hamster = Serialization.readPlayer();
-            hamster.loadTextures();
+            hamster.loadTextures(this);
         }
         else {
             hamster = new Hamster(this);

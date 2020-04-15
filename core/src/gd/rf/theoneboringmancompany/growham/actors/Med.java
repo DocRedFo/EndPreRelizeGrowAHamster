@@ -22,7 +22,7 @@ public class Med extends MyButton {
                     sound.play(Volume);
                     main.hamster.setMoney(main.hamster.getMoney() - Integer.parseInt(howMuch));
                     for (int i = 0; i < 10 && main.hamster.getHealth() < 100; i++){
-                        main.hamster.setHealth(main.hamster.getHealth() + 10);
+                        main.hamster.setHealth(main.hamster.getHealth() + 1);
                     }
                 }
                 else {

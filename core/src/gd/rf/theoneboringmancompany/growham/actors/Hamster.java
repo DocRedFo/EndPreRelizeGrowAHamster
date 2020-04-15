@@ -10,10 +10,14 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import java.io.Serializable;
 
 import gd.rf.theoneboringmancompany.growham.Main;
+import gd.rf.theoneboringmancompany.growham.screens.ScoreScreen;
 
 public class Hamster extends Actor implements Serializable {
+    private transient Main main;
+
     protected String name;
 
+    public int gameTime = 0;
     private boolean hasNamed = false;
 
     private int age = 1;
@@ -62,6 +66,8 @@ public class Hamster extends Actor implements Serializable {
     private transient Texture OldSleep;
 
     public Hamster(Main main){
+        this.main = main;
+
         standardX = main.stage.getWidth()/2.5f;
         standardY = main.stage.getHeight()/21;
 
@@ -70,10 +76,12 @@ public class Hamster extends Actor implements Serializable {
         Y = standardY;
         setPosition(X, Y);
 
-        loadTextures();
+        loadTextures(main);
     }
 
-    public void loadTextures(){
+    public void loadTextures(Main main){
+        main = main;
+
         smallSleep = new Texture("Pictures/Hamster/Sleep/Small/sleep.png");
         NormalSleep = new Texture("Pictures/Hamster/Sleep/Normal/sleep.png");
         OldSleep = new Texture("Pictures/Hamster/Sleep/Old/sleep.png");
@@ -168,7 +176,7 @@ public class Hamster extends Actor implements Serializable {
         else if (age > 1095){
             texture = OldSleep;
         }
-        if (getHealth() <= 0 || getHungry() <= 0) {
+        if (getHealth() <= 90 || getHungry() <= 0) {
             if (age < 200) {
                 texture = smallSleep;
             }
@@ -178,6 +186,7 @@ public class Hamster extends Actor implements Serializable {
             else if (age > 800 && age < 1095) {
                 texture = OldSleep;
             }
+            death();
         }
 
         animation = new Animation<>(animationTime, atlas.getRegions());
@@ -185,16 +194,18 @@ public class Hamster extends Actor implements Serializable {
     }
 
     private void death(){
-
+        main.database.insert(name, age);
+        main.setScreen(new ScoreScreen(main));
+        Gdx.files.local("player.dat").delete();
     }
 
     public void liveInformation(){
-        if (ageTime >= 3600){
+        if (ageTime >= 1){
             ageTime = 0;
             age++;
             money += 25;
         }
-        if (time >= 10) {
+        if (time >= 0) {
             time = 0;
             int i = (int) (Math.random() * 100);
             switch (i) {
@@ -279,5 +290,9 @@ public class Hamster extends Actor implements Serializable {
     @Override
     public float getY() {
         return Y;
+    }
+
+    public int getGameTime() {
+        return gameTime;
     }
 }
