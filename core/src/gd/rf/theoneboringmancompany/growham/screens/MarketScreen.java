@@ -2,10 +2,10 @@ package gd.rf.theoneboringmancompany.growham.screens;
 
 import gd.rf.theoneboringmancompany.growham.Main;
 import gd.rf.theoneboringmancompany.growham.actors.Back;
-import gd.rf.theoneboringmancompany.growham.actors.Food;
-import gd.rf.theoneboringmancompany.growham.actors.Med;
-import gd.rf.theoneboringmancompany.growham.actors.Update;
-import gd.rf.theoneboringmancompany.growham.utils.MyScreen;
+import gd.rf.theoneboringmancompany.growham.actors.market.Food;
+import gd.rf.theoneboringmancompany.growham.actors.market.Med;
+import gd.rf.theoneboringmancompany.growham.actors.market.Upgrade;
+import gd.rf.theoneboringmancompany.growham.tools.MyScreen;
 
 public class MarketScreen extends MyScreen {
     public final static int NUMBER = 4;
@@ -16,15 +16,15 @@ public class MarketScreen extends MyScreen {
 
     @Override
     public void show() {
-        main.stage.addActor(new Back(main, PlayRoomScreen.NUMBER));
+        main.stage.addActor(new Back(main, PlayScreen.NUMBER));
         main.stage.addActor(new Med(main));
         main.stage.addActor(new Food(main));
-        main.stage.addActor(new Update(main));
+        main.stage.addActor(new Upgrade(main));
     }
 
     @Override
     public void render(float delta) {
         super.render(delta);
-        main.backInput(PlayRoomScreen.NUMBER);
+        main.backInput(PlayScreen.NUMBER);
     }
 }

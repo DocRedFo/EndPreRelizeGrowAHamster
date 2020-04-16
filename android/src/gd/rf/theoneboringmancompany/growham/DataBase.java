@@ -6,7 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import gd.rf.theoneboringmancompany.growham.utils.AndroidHandler;
+import gd.rf.theoneboringmancompany.growham.tools.AndroidHandler;
 
 public class DataBase implements AndroidHandler {
 
@@ -18,14 +18,15 @@ public class DataBase implements AndroidHandler {
     private static final String COLUMN_NAME = "Name";
     private static final String COLUMN_TIME = "Time";
 
-    private static final int NUM_COLUMN_ID = 0;
     private static final int NUM_COLUMN_NAME = 0;
     private static final int NUM_COLUMN_TIME = 1;
+
+    private static final String ORDER_BY = COLUMN_TIME + " DESC";
 
     private SQLiteDatabase mDataBase;
     private OpenHelper openHelper;
 
-    public DataBase(Context context) {
+    DataBase(Context context) {
         openHelper = new OpenHelper(context);
     }
 
@@ -51,10 +52,9 @@ public class DataBase implements AndroidHandler {
         Object[] o = new Object[6];
 
         Cursor mCursor = mDataBase.query(TABLE_NAME, columns, null, null,
-                null, null , COLUMN_TIME + " DESC", String.valueOf(3));
+                null, null , ORDER_BY, String.valueOf(3));
 
         int oNum = 0;
-
         if (mCursor.moveToFirst()) {
             int count = mCursor.getCount();
                 for (int i = 0; i < 3 && i < count; i++) {

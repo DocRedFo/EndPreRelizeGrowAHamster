@@ -4,18 +4,17 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 
 import gd.rf.theoneboringmancompany.growham.Main;
-import gd.rf.theoneboringmancompany.growham.actors.BreakAndPlay;
-import gd.rf.theoneboringmancompany.growham.actors.Exit;
-import gd.rf.theoneboringmancompany.growham.actors.Play;
-import gd.rf.theoneboringmancompany.growham.actors.Scores;
-import gd.rf.theoneboringmancompany.growham.utils.MyScreen;
+import gd.rf.theoneboringmancompany.growham.actors.menu.BreakAndPlay;
+import gd.rf.theoneboringmancompany.growham.actors.menu.Exit;
+import gd.rf.theoneboringmancompany.growham.actors.menu.Play;
+import gd.rf.theoneboringmancompany.growham.actors.menu.Scores;
+import gd.rf.theoneboringmancompany.growham.tools.MyScreen;
+import gd.rf.theoneboringmancompany.growham.tools.Settings;
 
 public class MenuScreen extends MyScreen {
     public static final int NUMBER = 1;
 
     private Music music;
-
-    private final float musicVolume = 20/100f;
 
     public MenuScreen(Main main) {
         super(main);
@@ -32,9 +31,9 @@ public class MenuScreen extends MyScreen {
         main.stage.addActor(new BreakAndPlay(main));
         main.stage.addActor(new Exit(main));
 
-        music = Gdx.audio.newMusic(Gdx.files.internal("Audio/Music/Menu.mp3"));
+        music = Gdx.audio.newMusic(Gdx.files.internal(Settings.Path.Audio.Music.MENU));
         music.setLooping(true);
-        music.setVolume(musicVolume);
+        music.setVolume(Settings.MusicAndSound.MUSIC_VOLUME);
         music.play();
     }
 

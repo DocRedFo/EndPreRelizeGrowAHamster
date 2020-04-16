@@ -10,15 +10,19 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
-import gd.rf.theoneboringmancompany.growham.actors.FitPlay;
-import gd.rf.theoneboringmancompany.growham.actors.Hamster;
-import gd.rf.theoneboringmancompany.growham.actors.Sleep;
+import gd.rf.theoneboringmancompany.growham.actors.play.Gym;
+import gd.rf.theoneboringmancompany.growham.actors.play.Hamster;
+import gd.rf.theoneboringmancompany.growham.actors.play.Sleep;
 import gd.rf.theoneboringmancompany.growham.screens.LogoScreen;
 import gd.rf.theoneboringmancompany.growham.screens.MenuScreen;
-import gd.rf.theoneboringmancompany.growham.screens.PlayRoomScreen;
-import gd.rf.theoneboringmancompany.growham.utils.AndroidDatabase;
-import gd.rf.theoneboringmancompany.growham.utils.AndroidHandler;
-import gd.rf.theoneboringmancompany.growham.utils.Serialization;
+import gd.rf.theoneboringmancompany.growham.screens.PlayScreen;
+import gd.rf.theoneboringmancompany.growham.tools.AndroidDatabase;
+import gd.rf.theoneboringmancompany.growham.tools.AndroidHandler;
+import gd.rf.theoneboringmancompany.growham.tools.Serialization;
+import gd.rf.theoneboringmancompany.growham.tools.Settings;
+
+import static gd.rf.theoneboringmancompany.growham.tools.Settings.CAMERA_HEIGHT;
+import static gd.rf.theoneboringmancompany.growham.tools.Settings.CAMERA_WIDTH;
 
 public class Main extends Game {
     private SpriteBatch batch;
@@ -27,11 +31,9 @@ public class Main extends Game {
     public Stage stage;
     public Hamster hamster;
     public Sleep sleep;
-    public FitPlay fitPlay;
+    public Gym gym;
 
     public AndroidDatabase database;
-
-    public long beginTime;
 
     public Main(AndroidHandler handlerDatabase){
         database = new AndroidDatabase(handlerDatabase);
@@ -43,10 +45,7 @@ public class Main extends Game {
 	public void create () {
 		batch = new SpriteBatch();
 
-        fontOrdinary = new BitmapFont(Gdx.files.internal("BitmapFonts/ordinarytext.fnt"));
-
-        float CAMERA_HEIGHT = 810;
-        float CAMERA_WIDTH = 1440;
+        fontOrdinary = new BitmapFont(Gdx.files.internal(Settings.Path.FONT));
 
         OrthographicCamera camera = new OrthographicCamera(CAMERA_WIDTH, CAMERA_HEIGHT);
         camera.position.set(CAMERA_WIDTH /2, CAMERA_HEIGHT /2, 0);
@@ -59,7 +58,7 @@ public class Main extends Game {
 
         Gdx.gl.glClearColor(0,0,0,1);
 
-        if (Gdx.files.local("player.dat").exists()){
+        if (Gdx.files.local(Settings.Path.SERIALIZATION_FILE).exists()){
             hamster = Serialization.readPlayer();
             hamster.loadTextures(this);
         }
@@ -68,9 +67,9 @@ public class Main extends Game {
         }
 
         sleep = new Sleep(this);
-        fitPlay = new FitPlay(this);
+        gym = new Gym(this);
 
-        beginTime = System.currentTimeMillis();
+        long beginTime = System.currentTimeMillis();
 
         if (hamster.endTimeFlag){
             long n = (beginTime - hamster.endTime) / 1000;
@@ -102,10 +101,10 @@ public class Main extends Game {
                     Gdx.input.vibrate(20);
                     setScreen(new MenuScreen(this));
                     break;
-                case PlayRoomScreen.NUMBER:
+                case PlayScreen.NUMBER:
                     stage.clear();
                     Gdx.input.vibrate(20);
-                    setScreen(new PlayRoomScreen(this));
+                    setScreen(new PlayScreen(this));
                     break;
                 default:
                     break;
@@ -116,7 +115,7 @@ public class Main extends Game {
     private void serialization(){
         hamster.endTime = System.currentTimeMillis();
         hamster.endTimeFlag = true;
-        hamster.setPosition("Sit");
+        hamster.setPose("Sit");
         hamster.setX(hamster.standardX);
         Serialization.savePlayer(hamster);
     }

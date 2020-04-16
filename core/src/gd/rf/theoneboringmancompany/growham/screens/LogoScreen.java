@@ -1,8 +1,8 @@
 package gd.rf.theoneboringmancompany.growham.screens;
 
 import gd.rf.theoneboringmancompany.growham.Main;
-import gd.rf.theoneboringmancompany.growham.actors.Logo;
-import gd.rf.theoneboringmancompany.growham.utils.MyScreen;
+import gd.rf.theoneboringmancompany.growham.actors.logo.Logo;
+import gd.rf.theoneboringmancompany.growham.tools.MyScreen;
 
 public class LogoScreen extends MyScreen {
     public static final int NUMBER = 0;
