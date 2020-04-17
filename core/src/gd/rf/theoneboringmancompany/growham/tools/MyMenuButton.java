@@ -48,7 +48,7 @@ public abstract class MyMenuButton extends Button {
     }
 
     public void dispose(){
-        atlas.dispose();
+        //atlas.dispose();
     }
 
 }

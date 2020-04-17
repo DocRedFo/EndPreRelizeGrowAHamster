@@ -24,8 +24,8 @@ public class BreakAndPlay extends MyMenuButton {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 if (Gdx.files.local(Settings.Path.SERIALIZATION_FILE).exists()){
-                    sound.play(Settings.MusicAndSound.SOUND_VOLUME);
                     Gdx.files.local(Settings.Path.SERIALIZATION_FILE).delete();
+                    sound.play(Settings.MusicAndSound.SOUND_VOLUME);
                     main.hamster = new Hamster(main);
                     main.setScreen(new PlayScreen(main));
                 }

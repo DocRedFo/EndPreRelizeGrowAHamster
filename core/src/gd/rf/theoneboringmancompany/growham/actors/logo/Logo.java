@@ -22,27 +22,30 @@ public class Logo extends Actor {
         this.main = main;
 
         logo = new Texture(Settings.Path.Pictures.Images.LOGO);
-        sound = Gdx.audio.newSound(Gdx.files.internal(Settings.Path.Audio.Sounds.OK));
+        //sound = Gdx.audio.newSound(Gdx.files.internal(Settings.Path.Audio.Sounds.OK));
 
         setPosition(0,0);
         setWidth(main.stage.getWidth());
         setHeight(main.stage.getHeight());
 
-        addListener(new ClickListener(){
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                sound.play(Settings.MusicAndSound.SOUND_VOLUME);
-                main.setScreen(new MenuScreen(main));
-                logo.dispose();
-                sound.dispose();
-            }
-        });
+//        addListener(new ClickListener(){
+//            @Override
+//            public void clicked(InputEvent event, float x, float y) {
+//                sound.play(Settings.MusicAndSound.SOUND_VOLUME);
+//                main.setScreen(new MenuScreen(main));
+//            }
+//        });
 
+    }
+
+    public void dispose(){
+        logo.dispose();
+        sound.dispose();
     }
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
         batch.draw(logo, 0, 0);
-        main.fontOrdinary.draw(batch, Settings.Text.WELCOME, main.stage.getWidth()/2, main.stage.getHeight()/12);
+        //main.fontOrdinary.draw(batch, Settings.Text.WELCOME, main.stage.getWidth()/2, main.stage.getHeight()/12);
     }
 }

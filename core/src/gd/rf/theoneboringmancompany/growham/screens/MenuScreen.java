@@ -26,9 +26,9 @@ public class MenuScreen extends MyScreen {
         super.show();
         main.fontOrdinary.getData().setScale(2.5f);
 
-        main.stage.addActor(new Play(main));
-        main.stage.addActor(new Scores(main));
-        main.stage.addActor(new BreakAndPlay(main));
+        main.stage.addActor(main.playB);
+        main.stage.addActor(main.scores);
+        main.stage.addActor(main.breakAndPlay);
         main.stage.addActor(new Exit(main));
 
         music = Gdx.audio.newMusic(Gdx.files.internal(Settings.Path.Audio.Music.MENU));

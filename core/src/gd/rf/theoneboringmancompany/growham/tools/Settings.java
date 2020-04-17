@@ -97,7 +97,7 @@ public abstract class Settings {
             public final static String PLAY_BUTTON_ATLAS =
                     "Pictures/Buttons/Animation/Play/sprite.atlas";
             public final static String SCORES_BUTTON_ATLAS =
-                    "Pictures/Buttons/Animation/Play/sprite.atlas";
+                    "Pictures/Buttons/Animation/Scores/sprite.atlas";
             public final static String BREAK_AND_PLAY_BUTTON_ATLAS =
                     "Pictures/Buttons/Animation/BreakAndPlay/sprite.atlas";
         }

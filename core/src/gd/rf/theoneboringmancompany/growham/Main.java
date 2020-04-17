@@ -3,13 +3,17 @@ package gd.rf.theoneboringmancompany.growham;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
+import gd.rf.theoneboringmancompany.growham.actors.menu.BreakAndPlay;
+import gd.rf.theoneboringmancompany.growham.actors.menu.Play;
+import gd.rf.theoneboringmancompany.growham.actors.menu.Scores;
 import gd.rf.theoneboringmancompany.growham.actors.play.Gym;
 import gd.rf.theoneboringmancompany.growham.actors.play.Hamster;
 import gd.rf.theoneboringmancompany.growham.actors.play.Sleep;
@@ -25,15 +29,18 @@ import static gd.rf.theoneboringmancompany.growham.tools.Settings.CAMERA_HEIGHT;
 import static gd.rf.theoneboringmancompany.growham.tools.Settings.CAMERA_WIDTH;
 
 public class Main extends Game {
-    private SpriteBatch batch;
     public BitmapFont fontOrdinary;
     public Viewport viewport;
     public Stage stage;
     public Hamster hamster;
     public Sleep sleep;
     public Gym gym;
-
+    public AssetManager manager;
     public AndroidDatabase database;
+
+    public Play playB;
+    public BreakAndPlay breakAndPlay;
+    public Scores scores;
 
     public Main(AndroidHandler handlerDatabase){
         database = new AndroidDatabase(handlerDatabase);
@@ -43,8 +50,7 @@ public class Main extends Game {
 
     @Override
 	public void create () {
-		batch = new SpriteBatch();
-
+        manager = new AssetManager();
         fontOrdinary = new BitmapFont(Gdx.files.internal(Settings.Path.FONT));
 
         OrthographicCamera camera = new OrthographicCamera(CAMERA_WIDTH, CAMERA_HEIGHT);
@@ -56,7 +62,7 @@ public class Main extends Game {
         stage = new Stage(viewport);
         Gdx.input.setInputProcessor(stage);
 
-        Gdx.gl.glClearColor(0,0,0,1);
+        //manager.get(Settings.Path.Audio.Sounds.OK, Sound.class);
 
         if (Gdx.files.local(Settings.Path.SERIALIZATION_FILE).exists()){
             hamster = Serialization.readPlayer();
@@ -85,11 +91,13 @@ public class Main extends Game {
             }
         }
 
+       //manager.finishLoading();
+
         this.setScreen(new LogoScreen(this));
 	}
 
 	public void backInput(int i){
-        if (Gdx.input.isKeyPressed (Input.Keys.BACK)) {
+        if (Gdx.input.isKeyJustPressed(Input.Keys.BACK)) {
             switch (i) {
                 case LogoScreen.NUMBER:
                     stage.clear();
@@ -132,8 +140,8 @@ public class Main extends Game {
 	public void dispose () {
         serialization();
         super.dispose();
-        batch.dispose();
         fontOrdinary.dispose();
         stage.dispose();
+        manager.dispose();
 	}
 }

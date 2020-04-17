@@ -31,7 +31,6 @@ public class Play extends MyMenuButton {
                 sound.play(Settings.MusicAndSound.SOUND_VOLUME);
                 main.stage.clear();
                 main.setScreen(new PlayScreen(main));
-                dispose();
             }
         });
 
@@ -40,7 +39,7 @@ public class Play extends MyMenuButton {
     @Override
     public void dispose() {
         super.dispose();
-        background.dispose();
+        //background.dispose();
     }
 
     @Override
